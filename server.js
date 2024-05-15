@@ -1,27 +1,22 @@
+// Required modules go at the top
 const express = require('express');
 const cors = require('cors');
 const logger = require('morgan');
-const todosRouter = require ('./routes/todos');
+const todosRouter = require('./routes/todos');
 
-
-//configuration variables
+// Configuration variables
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-//middleware pipeline
+// Middleware Pipelane
 app.use(cors());
+app.use(express.json());
 app.use(logger('dev'));
 
+// Routers
+app.use('/todos', todosRouter);
 
-
-// //routers
-// // //test router 
-// app.get('/', function (req, res){
-//     res.json('success');
-// })
-app.use('/todos', todosRouter)
-
-//requqest listening
-app.listen(PORT, function() {
-    console.log(`Sever running on port: ${PORT}`)
+// Request Listener
+app.listen(PORT, function () {
+  console.log(`Server running on port: ${PORT}`);
 });
